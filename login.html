@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+  .home-btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background-color: #24285A;
+    color: #fff;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+
+  .home-btn:hover {
+    background-color: #3f46b0;
+  }
+</style>
+
+</head>
+<body class="auth-page">
+
+  <form id="loginForm" class="auth-card" novalidate>
+    <h2>Admin Login</h2>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        placeholder="admin@example.com"
+        required
+        autocomplete="email"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="••••••••"
+        required
+        autocomplete="current-password"
+      />
+    </div>
+
+    <button type="submit" class="btn primary-btn">
+      Login
+    </button>
+
+    <p id="loginError" class="form-error" aria-live="polite"></p>
+  </form>
+
+  <a href="index.html" class="btn home-btn">Home</a>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+
+<script>
+console.log("Supabase global:", window.supabase);
+const SUPABASE_URL = "https://xnbbkfuhqegeybubtzdb.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhuYmJrZnVocWVnZXlidWJ0emRiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU5NTAyMDgsImV4cCI6MjA4MTUyNjIwOH0.2jyApj2JeIPKkeNetq6OUQLt63xeGvMwc8EEPH17reg";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
+
+console.log("Supabase client:", supabaseClient);
+console.log("Auth object:", supabaseClient.auth);
+
+const loginForm = document.getElementById("loginForm");
+const loginError = document.getElementById("loginError");
+
+loginForm.addEventListener("submit", async e => {
+  e.preventDefault();
+
+  loginError.textContent = "";
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+
+    email,
+    password
+  });
+
+  if (error) {
+    loginError.textContent = error.message;
+    return;
+  }
+
+  console.log("Logged in:", data.user);
+
+  window.location.href = "admin.html";
+});
+</script>
+
+
+
+
+
+
+</body>
+</html>

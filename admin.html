@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+
+  <link rel="stylesheet" href="style.css" />
+  </head>
+<body class="admin-page">
+
+<header class="admin-header">
+  <h1>Admin Dashboard</h1>
+  <button id="logoutBtn">Logout</button>
+</header>
+
+<main class="admin-container">
+
+  <!-- CREATE / EDIT FORM -->
+  <section class="admin-form-section">
+    <h2 id="formTitle">Add New Project</h2>
+
+    <form id="projectForm">
+      <input type="hidden" id="projectId" />
+
+      <input type="text" id="title" placeholder="Project Title" required />
+
+      <textarea id="shortDesc" placeholder="Short description"></textarea>
+      <textarea id="longDesc" placeholder="Full project description"></textarea>
+
+      <legend>Select Project Section<div class="tag-selector">
+      <label><input type="checkbox" value="SQL"> SQL</label>
+      <label><input type="checkbox" value="Python"> Python</label>
+      <label><input type="checkbox" value="PowerBi"> PowerBi</label>
+      <label><input type="checkbox" value="Tableau"> Tableau</label>
+      <label><input type="checkbox" value="Excel"> Excel</label>
+      <label><input type="checkbox" value="R"> R</label>
+      <label><input type="checkbox" value="ML"> ML</label>
+    </div></legend>
+
+
+      <input type="url" id="github" placeholder="GitHub URL" />
+      <input type="url" id="demo" placeholder="Live Demo URL" />
+      <!-- File preview -->
+<div id="filePreview" class="file-preview" style="margin-bottom: 10px;"></div>
+
+      <input
+        type="file"
+        id="imageFile"
+        accept="image/*,application/pdf"
+      />
+
+
+
+
+      <button type="submit">Save Project</button>
+    </form>
+  </section>
+
+  <!-- PROJECT LIST -->
+  <section class="admin-list-section">
+    <h2>Your Projects</h2>
+    <div id="adminProjects"></div>
+  </section>
+
+</main>
+
+
+<!-- About & Contact Section -->
+<section class="admin-form-section">
+  <h2>Site Info</h2>
+  <form id="siteInfoForm">
+    <fieldset class="about">
+      <legend>About</legend>
+      <label for="siteImage">Upload Image
+        <input type="file" id="siteImage" accept="image/*" />
+      </label>
+      <textarea id="siteAbout" placeholder="About content"></textarea>
+    </fieldset>
+    <fieldset class="contact">
+      <legend>Contact Information</legend`>
+      <input type="email" id="siteEmail" placeholder="abas@example.com" />
+      <input type="text" id="siteMobile" placeholder="phone" />
+      <input type="text" id="siteGithub" placeholder="github_url" />
+      <input type="text" id="siteLocation" placeholder="USA" />
+    </fieldset>
+    
+    <button type="submit">Save Site Info</button>
+  </form>
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="./admin.js"></script>
+
+</body>
+</html>

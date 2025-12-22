@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio Website"/>
+    <meta content="paulbeduosei.com" property="og:title"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <title>Paul Bedu Osei</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="brand">
+                <h1 class="logo">Portfolio
+                </h1>
+            </div>
+
+            <nav class="site-nav" aria-label="Main-navigation">
+            <button class="nav-toggle" aria-expanded="false">Menu</button>
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+
+        </div>
+
+    </header>
+
+    <section class="hero">
+        <div class="container hero-inner">
+            <h1>Hi, My name is <span class="highlight">Paul Bedu Osei</span></h1>
+
+            <h2>A Data professional</h2>
+
+            <p>I am an analytical and technically adept professional, leveraging a strong foundation in statistical analysis to extract meaningful insights from databases.</p>
+
+
+            <div class="hero-buttons">
+                <a href="#projects" class="btn primary-btn">View Projects</a>
+                <a href="#contact" class="btn secondary-btn">Contact Me</a>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="projects" id="projects">
+        <div class="container projects-inner">
+            <h2 class="section-title">Projects</h2>
+            <p class="section-subtitle">
+                Selected Projects
+            </p>
+            <div class="project-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="SQL">SQL</button>
+            <button class="filter-btn" data-filter="Python">Python</button>
+            <button class="filter-btn" data-filter="PowerBi">PowerBi</button>
+            <button class="filter-btn" data-filter="Tableau">Tableau</button>
+            <button class="filter-btn" data-filter="Excel">Excel</button>
+            <button class="filter-btn" data-filter="R">R</button>
+            <button class="filter-btn" data-filter="ML">ML</button>
+          </div>
+
+
+                        <!-- SQL PROJECTS -->
+            <h3 class="projects-group-title">SQL Projects</h3>
+            <div class="projects-grid" id="sqlProjects"></div>
+
+            <!-- PYTHON PROJECTS -->
+            <h3 class="projects-group-title">Python Projects</h3>
+            <div class="projects-grid" id="pythonProjects"></div>
+
+
+                        <!-- POWERBI PROJECTS -->
+            <h3 class="projects-group-title">PowerBI Projects</h3>
+            <div class="projects-grid" id="powerbiProjects"></div>
+
+            <!-- TABLEAU PROJECTS -->
+            <h3 class="projects-group-title">Tableau Projects</h3>
+            <div class="projects-grid" id="tableauProjects"></div>
+
+            <!-- Excel PROJECTS -->
+            <h3 class="projects-group-title">Excel Projects</h3>
+            <div class="projects-grid" id="excelProjects"></div>
+
+
+            <!-- R PROJECTS -->
+            <h3 class="projects-group-title">R Projects</h3>
+            <div class="projects-grid" id="rProjects"></div>
+
+
+            <!-- ML PROJECTS -->
+            <h3 class="projects-group-title">ML Projects</h3>
+            <div class="projects-grid" id="mlProjects"></div>
+
+
+            <!-- Project cards injected by JavaScript -->
+            </div>
+        </div>
+
+    </section>
+
+
+    <section class="about-contact hidden" id="about">
+  <div class="container about-contact-inner">
+
+    <!-- ABOUT -->
+    <div class="about-card">
+      <div class="about-image">
+        <img id="aboutImage" src="" alt="Profile photo">
+      </div>
+
+      <div class="about-content">
+        <h2>About Me</h2>
+        <p id="aboutText"></p>
+      </div>
+    </div>
+  </section>
+
+
+    
+    <!-- CONTACT -->
+    <div class="contact-card hidden" id="contact">
+      <h2>Contact</h2>
+
+      <ul class="contact-list">
+        <li>
+          <span>Email</span>
+          <a id="contactEmail" href=""></a>
+        </li>
+
+        <li>
+          <span>Phone</span>
+          <span id="contactMobile"></span>
+        </li>
+
+        <li>
+          <span>GitHub</span>
+          <a id="contactGithub" href="" target="_blank"></a>
+        </li>
+
+        <li>
+          <span>Location</span>
+          <span id="contactLocation"></span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+
+
+
+
+    <!-- ===== PROJECT MODAL ===== -->
+<div
+  class="modal"
+  id="projectModal"
+  role="dialog"
+  aria-modal="true"
+  aria-hidden="true"
+  aria-labelledby="modalTitle"
+>
+  <div class="modal-overlay"></div>
+
+  <div class="modal-content" tabindex="-1">
+    <button class="modal-close" aria-label="Close modal">&times;</button>
+
+    <div id="modalMedia"></div>
+    <h3 id="modalTitle"></h3>
+    <p id="modalDescription"></p>
+
+    <ul class="project-tags" id="modalTags"></ul>
+
+    <div class="modal-links" id="modalLinks"></div>
+  </div>
+</div>
+
+<!-- PDF Preview Modal -->
+<div id="pdfModal" class="pdf-modal hidden">
+  <div class="pdf-modal-overlay"></div>
+
+  <div class="pdf-modal-content">
+    <button class="pdf-close-btn">&times;</button>
+    <iframe id="pdfViewer" src="" frameborder="0"></iframe>
+  </div>
+</div>
+
+
+<footer class="site-footer">
+  <p>© 2025 Paul Bedu Osei</p>
+
+  <a href="login.html" class="admin-login-link">
+    Admin Login
+  </a>
+</footer>
+
+
+
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script>
+
+const SUPABASE_URL = "https://xnbbkfuhqegeybubtzdb.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhuYmJrZnVocWVnZXlidWJ0emRiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU5NTAyMDgsImV4cCI6MjA4MTUyNjIwOH0.2jyApj2JeIPKkeNetq6OUQLt63xeGvMwc8EEPH17reg";
+
+  const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+  );
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  
+
+  const sqlProjectsGrid = document.getElementById("sqlProjects");
+  const pythonProjectsGrid = document.getElementById("pythonProjects");
+  const powerbiProjectsGrid = document.getElementById("powerbiProjects");
+  const tableauProjectsGrid = document.getElementById("tableauProjects");
+  const excelProjectsGrid = document.getElementById("excelProjects");
+  const rProjectsGrid = document.getElementById("rProjects");
+  const mlProjectsGrid = document.getElementById("mlProjects");
+
+
+  let projects = [];
+
+  async function loadProjects() {
+    const { data, error } = await supabaseClient
+      .from("projects")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    projects = data;
+    renderFilteredProjects("all");
+
+  }
+
+function renderFilteredProjects(filter = "all") {
+  // Clear all grids
+  sqlProjectsGrid.innerHTML = "";
+  pythonProjectsGrid.innerHTML = "";
+  powerbiProjectsGrid.innerHTML = "";
+  tableauProjectsGrid.innerHTML = "";
+  excelProjectsGrid.innerHTML = "";
+  rProjectsGrid.innerHTML = "";
+  mlProjectsGrid.innerHTML = "";
+
+  projects.forEach(project => {
+    if (filter !== "all" && !project.tags?.includes(filter)) return;
+
+    const card = document.createElement("article");
+    card.className = "project-card";
+
+    card.innerHTML = `
+      <div class="project-image">
+        ${renderProjectMedia(project)}
+      </div>
+      <div class="project-content">
+        <h3>${project.title}</h3>
+        <p>${project.short_desc}</p>
+
+        <ul class="project-tags">
+          ${(project.tags || []).map(t => `<li class="clickable-tag" data-tag="${t}">${t}</li>
+`).join("")}
+        </ul>
+
+        <a class="project-btn" data-id="${project.id}">
+          View Project
+        </a>
+      </div>
+    `;
+
+    document.addEventListener("click", e => {
+  if (e.target.classList.contains("clickable-tag")) {
+    const tag = e.target.dataset.tag;
+
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.filter === tag);
+    });
+
+    renderFilteredProjects(tag);
+  }
+});
+
+
+    // Append to correct group(s)
+    if (project.tags?.includes("SQL")) sqlProjectsGrid.appendChild(card.cloneNode(true));
+    if (project.tags?.includes("Python")) pythonProjectsGrid.appendChild(card.cloneNode(true));
+    if (project.tags?.includes("PowerBi")) powerbiProjectsGrid.appendChild(card.cloneNode(true));
+    if (project.tags?.includes("Tableau")) tableauProjectsGrid.appendChild(card.cloneNode(true));
+    if (project.tags?.includes("Excel")) excelProjectsGrid.appendChild(card.cloneNode(true));
+    if (project.tags?.includes("R")) rProjectsGrid.appendChild(card.cloneNode(true));
+    if (project.tags?.includes("ML")) mlProjectsGrid.appendChild(card.cloneNode(true));
+  });
+}
+
+
+/* =========================
+     MEDIA RENDERING (IMAGE / PDF)
+     ========================= */
+  function renderProjectMedia(project) {
+    if (!project.file_url) {
+      return `<img src="https://via.placeholder.com/600x400" alt="Placeholder">`;
+    }
+
+    if (project.file_type === "image") {
+      return `<img src="${project.file_url}" alt="${project.title}">`;
+    }
+
+    if (project.file_type === "pdf") {
+  return `
+    <button 
+      class="project-pdf-btn"
+      data-pdf="${project.file_url}">
+      📄 Preview PDF
+    </button>
+  `;
+}
+
+
+  }
+
+
+  loadProjects();
+
+
+/* Nav toggle in mobile */
+const navToggle = document.querySelector(".nav-toggle");
+  const navList = document.querySelector(".nav-list");
+
+  navToggle.addEventListener("click", () => {
+    const expanded = navToggle.getAttribute("aria-expanded") === "true" || false;
+    navToggle.setAttribute("aria-expanded", !expanded);
+    navList.style.display = expanded ? "none" : "flex";
+  }); 
+
+ 
+
+const modal = document.getElementById("projectModal");
+const modalMedia = document.getElementById("modalMedia");
+const modalTitle = document.getElementById("modalTitle");
+const modalDescription = document.getElementById("modalDescription");
+const modalTags = document.getElementById("modalTags");
+const modalLinks = document.getElementById("modalLinks");
+const modalClose = document.querySelector(".modal-close");
+const modalOverlay = document.querySelector(".modal-overlay");
+const modalContent = document.querySelector(".modal-content");
+
+let lastFocusedElement = null;
+
+// OPEN MODAL
+document.addEventListener("click", e => {
+  if (!e.target.classList.contains("project-btn")) return;
+
+  const projectId = e.target.dataset.id;
+  const project = projects.find(p => p.id === projectId);
+  if (!project) return;
+
+  lastFocusedElement = document.activeElement;
+
+  // RESET MEDIA
+  modalMedia.innerHTML = "";
+
+  // IMAGE
+  if (project.file_type === "image" && project.file_url) {
+    modalMedia.innerHTML = `
+      <img src="${project.file_url}" alt="${project.title}">
+    `;
+  }
+
+  // PDF PREVIEW
+  if (project.file_type === "pdf" && project.file_url) {
+    modalMedia.innerHTML = `
+      <iframe 
+        src="${project.file_url}" 
+        title="${project.title}"
+        class="pdf-preview"
+      ></iframe>
+
+      <a href="${project.file_url}" target="_blank" class="pdf-open">
+        📄 Open PDF in new tab
+      </a>
+    `;
+  }
+
+  modalTitle.textContent = project.title;
+  modalDescription.textContent = project.long_desc || "";
+
+  modalTags.innerHTML = (project.tags || [])
+    .map(tag => `<li>${tag}</li>`)
+    .join("");
+
+  modalLinks.innerHTML = `
+    ${project.github ? `<a href="${project.github}" target="_blank">GitHub</a>` : ""}
+    ${project.demo ? `<a href="${project.demo}" target="_blank">Live Demo</a>` : ""}
+  `;
+
+  // ACCESSIBILITY FIX
+  modal.removeAttribute("inert");
+  modal.classList.add("active");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+
+  modalContent.focus();
+});
+
+
+// CLOSE MODAL FUNCTION
+function closeModal() {
+  modal.classList.remove("active");
+  modal.setAttribute("aria-hidden", "true");
+  modal.setAttribute("inert", "");
+  document.body.style.overflow = "";
+
+  if (lastFocusedElement) {
+    lastFocusedElement.focus();
+  }
+}
+
+
+modalClose.addEventListener("click", closeModal);
+modalOverlay.addEventListener("click", closeModal);
+
+// ESC KEY SUPPORT
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && modal.classList.contains("active")) {
+    closeModal();
+  }
+});
+
+function getFocusableElements(container) {
+  return container.querySelectorAll(
+    'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+  );
+}
+
+function getProjectImageUrl(filename) {
+  if (!filename) return "";
+
+  return `${SUPABASE_URL}/storage/v1/object/public/project-images/${filename}`;
+}
+
+const projectGroups = {
+  SQL: {
+    title: document.querySelector('h3.projects-group-title:nth-of-type(1)'),
+    grid: document.getElementById("sqlProjects")
+  },
+  Python: {
+    title: document.querySelector('h3.projects-group-title:nth-of-type(2)'),
+    grid: document.getElementById("pythonProjects")
+  },
+  PowerBi: {
+    title: document.querySelector('h3.projects-group-title:nth-of-type(3)'),
+    grid: document.getElementById("powerbiProjects")
+  },
+  Tableau: {
+    title: document.querySelector('h3.projects-group-title:nth-of-type(4)'),
+    grid: document.getElementById("tableauProjects")
+  },
+  Excel: {
+    title: document.querySelector('h3.projects-group-title:nth-of-type(5)'),
+    grid: document.getElementById("excelProjects")
+  },
+  R: {
+    title: document.querySelector('h3.projects-group-title:nth-of-type(6)'),
+    grid: document.getElementById("rProjects")
+  },
+  ML: {
+    title: document.querySelector('h3.projects-group-title:nth-of-type(7)'),
+    grid: document.getElementById("mlProjects")
+  }
+};
+
+
+function toggleProjectGroups(filter) {
+  Object.entries(projectGroups).forEach(([key, group]) => {
+    const shouldShow = filter === "all" || filter === key;
+
+    group.title.style.display = shouldShow ? "" : "none";
+    group.grid.style.display = shouldShow ? "" : "none";
+  });
+}
+
+
+document.querySelectorAll(".filter-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    // Active state
+    document.querySelectorAll(".filter-btn")
+      .forEach(b => b.classList.remove("active"));
+
+    btn.classList.add("active");
+
+    const filter = btn.dataset.filter;
+
+    renderFilteredProjects(filter);
+    toggleProjectGroups(filter); // 👈 THIS IS THE FIX
+  });
+});
+
+
+document.addEventListener("click", e => {
+  if (e.target.classList.contains("clickable-tag")) {
+    const tag = e.target.dataset.tag;
+
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.filter === tag);
+    });
+
+    renderFilteredProjects(tag);
+    toggleProjectGroups(tag); // 👈 REQUIRED
+  }
+});
+
+
+
+});
+
+
+
+/* About and Contact Section Loaded from site info */
+
+async function loadSiteInfo() {
+  try {
+    const { data, error } = await supabaseClient
+      .from("site_info")
+      .select("*")
+      .maybeSingle();
+
+    if (error) {
+      console.error("Failed to load site info:", error);
+      return;
+    }
+
+    if (!data) {
+      console.warn("No site info found");
+      return;
+    }
+
+    // About
+    const aboutImage = document.getElementById("aboutImage");
+    const aboutText = document.getElementById("aboutText");
+    if (aboutImage && data.image) aboutImage.src = data.image;
+    if (aboutText) aboutText.textContent = data.about || "";
+
+    // Contact
+    const contactEmail = document.getElementById("contactEmail");
+    const contactMobile = document.getElementById("contactMobile");
+    const contactGithub = document.getElementById("contactGithub");
+    const contactLocation = document.getElementById("contactLocation");
+
+    if (contactEmail) {
+      contactEmail.href = data.email ? `mailto:${data.email}` : "";
+      contactEmail.textContent = data.email || "";
+    }
+    if (contactMobile) contactMobile.textContent = data.mobile || "";
+    if (contactGithub) {
+      contactGithub.href = data.github || "";
+      contactGithub.textContent = data.github || "";
+    }
+    if (contactLocation) contactLocation.textContent = data.location || "";
+
+  } catch (err) {
+    console.error("Unexpected error:", err);
+  }
+
+  
+}
+
+// Run on page load
+loadSiteInfo();
+
+
+/* About - Contact Toggle */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const aboutContactSection = document.getElementById("about");
+
+  // Show About/Contact when nav link is clicked
+  const aboutNavLink = document.querySelector('.nav-list a[href="#about"]');
+  if (aboutNavLink) {
+    aboutNavLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      aboutContactSection.classList.remove("hidden");
+      aboutContactSection.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+
+
+  // Show About/Contact when nav link is clicked
+  const contactNavLink = document.querySelector('.nav-list a[href="#about"]');
+  if (aboutNavLink) {
+    aboutNavLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      aboutContactSection.classList.remove("hidden");
+      aboutContactSection.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+
+  // Optional: show Contact when "View Contact" button is clicked
+ 
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const contactCard = document.getElementById("contact");
+
+  // Show contact when nav link clicked
+  const contactNavLink = document.querySelector('.nav-list a[href="#contact"]');
+  if (contactNavLink) {
+    contactNavLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      contactCard.classList.remove("hidden");
+      contactCard.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+
+  // Show contact when "Contact Me" button clicked
+  const contactBtn = document.querySelector('a[href="#contact"].secondary-btn');
+  if (contactBtn) {
+    contactBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      contactCard.classList.remove("hidden");
+      contactCard.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+});
+
+
+const pdfModal = document.getElementById("pdfModal");
+const pdfViewer = document.getElementById("pdfViewer");
+const closePdfBtn = document.querySelector(".pdf-close-btn");
+const overlay = document.querySelector(".pdf-modal-overlay");
+
+/* OPEN MODAL (PDF) */
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".project-pdf-btn");
+  if (!btn) return;
+
+  const pdfUrl = btn.dataset.pdf;
+  pdfViewer.src = pdfUrl;
+  pdfModal.classList.remove("hidden");
+});
+
+/* CLOSE MODAL */
+function closePdfModal() {
+  pdfViewer.src = "";
+  pdfModal.classList.add("hidden");
+}
+
+closePdfBtn.addEventListener("click", closePdfModal);
+overlay.addEventListener("click", closePdfModal);
+
+/* ESC KEY */
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closePdfModal();
+});
+
+
+
+</script>
+
+
+
+</body>
+</html>
