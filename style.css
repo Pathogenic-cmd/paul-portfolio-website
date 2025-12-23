@@ -736,12 +736,81 @@ html, body{
     width: 60px;
     height: 50px;
   }
+}
+
+/* =======================
+   TAG SELECTOR – FIXED MOBILE
+   ======================= */
+
+.project-tags-fieldset {
+  border: none;
+  padding: 0;
+  margin-bottom: 1.2rem;
+}
+
+.project-tags-fieldset legend {
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  padding: 0;
+}
+
+.tag-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Hide native checkbox */
+.tag-selector input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Pill label */
+.tag-selector label {
+  display: inline-flex;
+}
+
+/* Pill appearance */
+.tag-selector span {
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid #cbd5f5;
+  background: #f7f7f7;
+  color: #333;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+/* Checked */
+.tag-selector input:checked + span {
+  background: #2563eb;
+  color: #fff;
+  border-color: #2563eb;
+}
+
+/* Hover */
+.tag-selector label:hover span {
+  border-color: #2563eb;
+}
+
+/* =======================
+   MOBILE ADJUSTMENTS
+   ======================= */
+@media (max-width: 768px) {
+  .tag-selector {
+    gap: 0.4rem;
+  }
 
   .tag-selector span {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+    padding: 0.35rem 0.7rem;
   }
 }
+
 
 /* =======================
    MOBILE PROJECT LIST ANIMATION
