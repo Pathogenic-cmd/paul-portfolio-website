@@ -407,12 +407,14 @@ html, body{
 
 .modal-content {
   position: relative;
+  max-height: 85vh;        /* 👈 KEY FIX */
+  overflow-y: auto;        /* 👈 KEY FIX */
   background: #fff;
-  padding: 2rem;
-  max-width: 600px;
-  width: 90%;
   border-radius: 14px;
-  z-index: 1;
+  padding: 1.5rem;
+  width: min(90%, 900px);
+  margin: auto;
+  outline: none;
 }
 
 .modal-content img {

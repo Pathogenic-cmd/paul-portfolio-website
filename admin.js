@@ -25,6 +25,55 @@ const githubInput = document.getElementById("github");
 const demoInput = document.getElementById("demo");
 const imageFileInput = document.getElementById("imageFile");
 
+
+
+
+// =====================
+// RICH TEXT EDITORS
+// =====================
+function setupEditor(editorId, textareaId, placeholder) {
+  const textarea = document.getElementById(textareaId);
+  const editorEl = document.getElementById(editorId);
+
+  if (!textarea || !editorEl) return;
+
+  const quill = new Quill(editorEl, {
+    theme: "snow",
+    placeholder,
+    modules: {
+      toolbar: [
+        ["bold", "italic", "underline"],
+        [{ list: "ordered" }, { list: "bullet" }],
+        ["link"],
+        ["clean"]
+      ]
+    }
+  });
+
+  // Sync editor → textarea
+  quill.on("text-change", () => {
+    textarea.value = quill.root.innerHTML;
+  });
+
+  return quill;
+}
+
+// INIT EDITORS ON PAGE LOAD
+const shortDescEditor = setupEditor(
+  "shortDescEditor",
+  "shortDesc",
+  "Short description..."
+);
+
+const longDescEditor = setupEditor(
+  "longDescEditor",
+  "longDesc",
+  "Full project description..."
+);
+
+
+
+
 // =====================
 // AUTH CHECK
 // =====================
@@ -264,6 +313,7 @@ projectForm.addEventListener("submit", async e => {
     // Show file preview
     renderFilePreview(fileUrl, fileType, title);
 
+    
 
 
     // =====================
@@ -312,6 +362,14 @@ if (e.target.classList.contains("edit")) {
   titleInput.value = data.title;
   shortDescInput.value = data.short_desc;
   longDescInput.value = data.long_desc;
+  if (shortDescEditor && data.short_desc) {
+  shortDescEditor.root.innerHTML = data.short_desc;
+}
+
+if (longDescEditor && data.long_desc) {
+  longDescEditor.root.innerHTML = data.long_desc;
+}
+
   githubInput.value = data.github;
   demoInput.value = data.demo;
 

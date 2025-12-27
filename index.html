@@ -70,40 +70,27 @@
           </div>
 
 
-                        <!-- SQL PROJECTS -->
-            <h3 class="projects-group-title">SQL Projects</h3>
-            <div class="projects-grid" id="sqlProjects"></div>
+           <h3 class="projects-group-title" data-group="SQL">SQL Projects</h3>
+          <div class="projects-grid" id="sqlProjects"></div>
 
-            <!-- PYTHON PROJECTS -->
-            <h3 class="projects-group-title">Python Projects</h3>
-            <div class="projects-grid" id="pythonProjects"></div>
+          <h3 class="projects-group-title" data-group="Python">Python Projects</h3>
+          <div class="projects-grid" id="pythonProjects"></div>
 
+          <h3 class="projects-group-title" data-group="PowerBi">PowerBI Projects</h3>
+          <div class="projects-grid" id="powerbiProjects"></div>
 
-                        <!-- POWERBI PROJECTS -->
-            <h3 class="projects-group-title">PowerBI Projects</h3>
-            <div class="projects-grid" id="powerbiProjects"></div>
+          <h3 class="projects-group-title" data-group="Tableau">Tableau Projects</h3>
+          <div class="projects-grid" id="tableauProjects"></div>
 
-            <!-- TABLEAU PROJECTS -->
-            <h3 class="projects-group-title">Tableau Projects</h3>
-            <div class="projects-grid" id="tableauProjects"></div>
+          <h3 class="projects-group-title" data-group="Excel">Excel Projects</h3>
+          <div class="projects-grid" id="excelProjects"></div>
 
-            <!-- Excel PROJECTS -->
-            <h3 class="projects-group-title">Excel Projects</h3>
-            <div class="projects-grid" id="excelProjects"></div>
+          <h3 class="projects-group-title" data-group="R">R Projects</h3>
+          <div class="projects-grid" id="rProjects"></div>
 
+          <h3 class="projects-group-title" data-group="ML">ML Projects</h3>
+          <div class="projects-grid" id="mlProjects"></div>
 
-            <!-- R PROJECTS -->
-            <h3 class="projects-group-title">R Projects</h3>
-            <div class="projects-grid" id="rProjects"></div>
-
-
-            <!-- ML PROJECTS -->
-            <h3 class="projects-group-title">ML Projects</h3>
-            <div class="projects-grid" id="mlProjects"></div>
-
-
-            <!-- Project cards injected by JavaScript -->
-            </div>
         </div>
 
     </section>
@@ -232,6 +219,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let projects = [];
 
+  function hideEmptyProjectGroups() {
+  Object.values(projectGroups).forEach(({ title, grid }) => {
+    const hasProjects = grid.children.length > 0;
+    title.style.display = hasProjects ? "" : "none";
+    grid.style.display = hasProjects ? "" : "none";
+  });
+}
+
+
   async function loadProjects() {
     const { data, error } = await supabaseClient
       .from("projects")
@@ -245,6 +241,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     projects = data;
     renderFilteredProjects("all");
+    hideEmptyProjectGroups();
+
 
   }
 
@@ -455,34 +453,35 @@ function getProjectImageUrl(filename) {
 
 const projectGroups = {
   SQL: {
-    title: document.querySelector('h3.projects-group-title:nth-of-type(1)'),
+    title: document.querySelector('[data-group="SQL"]'),
     grid: document.getElementById("sqlProjects")
   },
   Python: {
-    title: document.querySelector('h3.projects-group-title:nth-of-type(2)'),
+    title: document.querySelector('[data-group="Python"]'),
     grid: document.getElementById("pythonProjects")
   },
   PowerBi: {
-    title: document.querySelector('h3.projects-group-title:nth-of-type(3)'),
+    title: document.querySelector('[data-group="PowerBi"]'),
     grid: document.getElementById("powerbiProjects")
   },
   Tableau: {
-    title: document.querySelector('h3.projects-group-title:nth-of-type(4)'),
+    title: document.querySelector('[data-group="Tableau"]'),
     grid: document.getElementById("tableauProjects")
   },
   Excel: {
-    title: document.querySelector('h3.projects-group-title:nth-of-type(5)'),
+    title: document.querySelector('[data-group="Excel"]'),
     grid: document.getElementById("excelProjects")
   },
   R: {
-    title: document.querySelector('h3.projects-group-title:nth-of-type(6)'),
+    title: document.querySelector('[data-group="R"]'),
     grid: document.getElementById("rProjects")
   },
   ML: {
-    title: document.querySelector('h3.projects-group-title:nth-of-type(7)'),
+    title: document.querySelector('[data-group="ML"]'),
     grid: document.getElementById("mlProjects")
   }
 };
+
 
 
 function toggleProjectGroups(filter) {
